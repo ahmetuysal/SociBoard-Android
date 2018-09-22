@@ -4,14 +4,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     public User mUser;
+    private Menu mOptionsMenu;
+
+    private final Fragment fragment1 = new FlightsFragment();
+    final FragmentManager fm = getSupportFragmentManager();
+    Fragment active = fragment1;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -19,14 +26,11 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(mUser.email);
+                case R.id.navigation_flights:
                     return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(mUser.phoneNumber);
+                case R.id.navigation_profile:
                     return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(mUser.surname);
+                case R.id.navigation_settings:
                     return true;
             }
             return false;
@@ -37,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mTextMessage = findViewById(R.id.message);
         BottomNavigationView navigation =  findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
@@ -50,6 +52,33 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.sociboard_logo_action_bar);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        fm.beginTransaction().add(R.id.main_container,fragment1, "1").commit();
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                return true;
+
+            case R.id.action_add:
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        mOptionsMenu = menu;
+        getMenuInflater().inflate(R.menu.my_flights_menu, menu);
+        return true;
+    }
+
 
 }

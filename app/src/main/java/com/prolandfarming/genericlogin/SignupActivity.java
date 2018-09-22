@@ -168,7 +168,7 @@ public class SignupActivity extends AppCompatActivity {
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 String userUID = firebaseUser.getUid();
                                 boolean isMale = mTitleSpinner.getSelectedItemPosition() == 0;
-                                User user = new User(email, name, surname, phoneNumber, isMale);
+                                User user = new User(userUID, email, name, surname, phoneNumber, isMale);
                                 mDatabase.getReference("/users/"+userUID+"/").setValue(user);
                                 Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                                 intent.putExtra(getString(R.string.INTENT_PARAM_KEY_USER), user);

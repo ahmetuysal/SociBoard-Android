@@ -14,7 +14,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    
+
     <string name="INTENT_PARAM_KEY_USER">INTENT_PARAM_KEY_USER</string>
 
     <string-array name="title_array">
@@ -44,7 +44,14 @@
     <string name="signup_terms">By clicking Sign Up, you agree to our Terms and Data Policy.</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_flights">Flights</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_settings">Settings</string>
+
+    <string name="action_search">Search</string>
+    <string name="action_add">Add</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_flight_chats">FlightChatsActivity</string>
 </resources>
