@@ -4,6 +4,7 @@
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -31,15 +32,7 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity
-            android:name=".FlightChatsActivity"
-            android:label="@string/title_activity_flight_chats"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prolandfarming.genericlogin.MainActivity" />
-        </activity>
+        <activity android:name=".FlightChatroomsActivity"></activity>
     </application>
 
 </manifest>

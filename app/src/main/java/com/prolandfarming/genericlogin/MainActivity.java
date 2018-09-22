@@ -1,5 +1,6 @@
 package com.prolandfarming.genericlogin;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,9 +8,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
+
+import com.prolandfarming.genericlogin.Models.User;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_flights:
+                    return true;
+                case R.id.navigation_favorites:
                     return true;
                 case R.id.navigation_profile:
                     return true;
@@ -54,6 +63,19 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         fm.beginTransaction().add(R.id.main_container,fragment1, "1").commit();
+
+        String fileName = "user_credentials.data";
+        User fileData = mUser;
+        try {
+            // Save the list of entries to internal storage
+            InternalStorage.writeObject(this, fileName, fileData);
+
+            // Retrieve the list from internal storage
+            // InternalStorage.readObject(this, "user_credentials.data");
+
+        } catch (IOException e) {
+            Log.e("main_act", e.getMessage());
+        }
     }
 
 

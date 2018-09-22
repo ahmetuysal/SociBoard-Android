@@ -33,7 +33,8 @@ public class FlightsFragment extends Fragment {
         mAddFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), FlightChatsActivity.class);
+                Intent intent = new Intent(getActivity(), FlightChatroomsActivity.class);
+                //intent.putExtra(getString(R.string.INTENT_PARAM_KEY_USER), user); TODO
                 startActivity(intent);
             }
         });

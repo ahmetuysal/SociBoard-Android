@@ -47,6 +47,7 @@
     <string name="title_flights">Flights</string>
     <string name="title_profile">Profile</string>
     <string name="title_settings">Settings</string>
+    <string name="title_favorites">Favorites</string>
 
     <string name="action_search">Search</string>
     <string name="action_add">Add</string>
