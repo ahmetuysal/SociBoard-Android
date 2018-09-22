@@ -12,16 +12,22 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.prolandfarming.genericlogin.Models.Chatroom;
 import com.prolandfarming.genericlogin.Models.User;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
     public User mUser;
     private Menu mOptionsMenu;
+    private DatabaseReference chatroomsReference = FirebaseDatabase.getInstance().getReference("/chatrooms/");
+
 
     private final Fragment fragment1 = new FlightsFragment();
     final FragmentManager fm = getSupportFragmentManager();
@@ -76,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("main_act", e.getMessage());
         }
+
+        //chatroomsReference.push().setValue(new Chatroom(UUID.randomUUID().toString(), "Deneme", null, null, "http://prolandfarming.com/wp-content/uploads/2018/07/cropped-icon_proland-1.png"
+        //       , false));
+        //chatroomsReference.push().setValue(new Chatroom(UUID.randomUUID().toString(), "Deneme2", null, null, "http://prolandfarming.com/wp-content/uploads/2018/07/cropped-icon_proland-1.png"
+        //        , false));
+
     }
 
 
