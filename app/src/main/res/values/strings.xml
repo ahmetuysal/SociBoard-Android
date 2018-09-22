@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">SociBoard</string>
+    <string name="app_slogan">Chat and meet people on the same flight with you</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_invalid_phone_number">This phone number is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    
+    <string name="INTENT_PARAM_KEY_USER">INTENT_PARAM_KEY_USER</string>
+
+    <string-array name="title_array">
+        <item>Mr.</item>
+        <item>Mrs.</item>
+    </string-array>
+
+    <string name="login">Login</string>
+    <string name="title">Title</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="login_with_social_media">Login with social media</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="already_have_account">Already have account?</string>
+    <string name="signup">Sign Up</string>
+    <string name="email">E-mail</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="surname">Surname</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="error_username_length">Kullanıcı adınız en az 6 karakter olmalıdır.</string>
+    <string name="error_email_format">Geçersiz e-posta formatı.</string>
+    <string name="error_email_valid">Girdiğiniz e-posta adresi geçersiz.</string>
+    <string name="error_email_empty">Lütfen e-postanızı giriniz.</string>
+    <string name="error_account_exists">Bu e-mail ile zaten kayıt olunmuş.</string>
+    <string name="error_pwdlength">Şifreniz en az 6 karakter olmalıdır.</string>
+    <string name="signup_terms">By clicking Sign Up, you agree to our Terms and Data Policy.</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>

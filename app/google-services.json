@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "532161734091",
+    "firebase_url": "https://thy-hackathon-7c0d9.firebaseio.com",
+    "project_id": "thy-hackathon-7c0d9",
+    "storage_bucket": "thy-hackathon-7c0d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532161734091:android:d22e62ab2fe941e6",
+        "android_client_info": {
+          "package_name": "com.prolandfarming.genericlogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532161734091-irkpsav98vrcrkeiv8qef95jploj00kl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUZixjIQA7e8ELRWSdKG_KBDB6-yRBc2Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
