@@ -38,7 +38,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".FlightChatroomsActivity" />
         </activity>
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".CarRentalActivity"
+            android:theme="@style/AppThemeWithActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ChatActivity" />
+        </activity>
     </application>
 
 </manifest>

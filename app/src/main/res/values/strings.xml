@@ -58,6 +58,7 @@
 
     <string name="action_search">Search</string>
     <string name="action_add">Add</string>
+    <string name="action_travel">Car Rental</string>
     <string name="add_chatroom_prompt">Join one of the public channels below</string>
     <string name="add_chatroom_other_option">or tap one of the seats to a personal chat with the visible passengers</string>
 

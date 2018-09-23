@@ -9,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -78,6 +81,10 @@ public class ChatActivity extends AppCompatActivity {
         mRecyler = findViewById(R.id.chat_recyler);
 
         mEdittext = findViewById(R.id.chat_entry_text);
+
+        if (mChatroom.chatroomName.equals("Travel")){
+
+        }
 
         FloatingActionButton fab_send_btn = findViewById(R.id.chat_send_message_fab);
         fab_send_btn.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +155,27 @@ public class ChatActivity extends AppCompatActivity {
         //adapter.add(new ToMessageItem(newMessage));
         mDBMessagesReference.child(newMessage.messageUID).setValue(newMessage);
         mChatroomReference.child(mChatroom.chatroomUID).child("messagesUID/").child((System.currentTimeMillis())+"").setValue(newMessage.messageUID);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        if (mChatroom.chatroomName.equals("Travel")){
+            getMenuInflater().inflate(R.menu.travel_menu, menu);
+            return true;
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_travel:
+                Intent intent = new Intent(ChatActivity.this, CarRentalActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 

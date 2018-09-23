@@ -59,9 +59,9 @@ public class FlightChatroomsActivity extends AppCompatActivity {
         mFlight.flightNumber = "TK2965";
         mFlight.operatingAirline = "THY";
         List<String> chatrooms = new ArrayList<>();
-        chatrooms.add("127224c4-b9c0-49af-afa1-b57af2d91821");
-        chatrooms.add("2751b63f-3de7-4413-a441-b0f2f6f891aa");
-        chatrooms.add("b86eb5ac-7a12-4446-b223-73ba3d5053f3");
+        chatrooms.add("127224c4-b9c0-49af-afa1-b57af2d91821");// merve 10d
+        chatrooms.add("2751b63f-3de7-4413-a441-b0f2f6f891aa"); // general
+        chatrooms.add("b86eb5ac-7a12-4446-b223-73ba3d5053f3"); // travel
         mFlight.chatroomsUID = chatrooms;
 
         Toolbar myToolbar = findViewById(R.id.flight_chatrooms_toolbar);
@@ -124,7 +124,7 @@ public class FlightChatroomsActivity extends AppCompatActivity {
 
                 }
             });
-            mChatroomRef.addValueEventListener(new ValueEventListener() {
+            mChatroomRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String cRoomName = dataSnapshot.child("chatroomName").getValue(String.class);
