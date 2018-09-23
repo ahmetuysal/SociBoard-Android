@@ -33,5 +33,4 @@ public class Chatroom implements Serializable{
         this.isPrivate = isPrivate;
     }
 
-
 }

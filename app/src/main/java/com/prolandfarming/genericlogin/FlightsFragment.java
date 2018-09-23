@@ -4,19 +4,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.plus.PlusOneButton;
+import com.xwray.groupie.GroupAdapter;
+import com.xwray.groupie.Item;
+import com.xwray.groupie.ViewHolder;
 
 public class FlightsFragment extends Fragment {
 
 
     //private OnFragmentInteractionListener mListener;
     private FloatingActionButton mAddFlightButton;
+    private RecyclerView mRecyler;
+    final GroupAdapter adapter = new GroupAdapter<ViewHolder>();
 
     public FlightsFragment() {
         // Required empty public constructor
@@ -38,6 +45,11 @@ public class FlightsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        mRecyler = view.findViewById(R.id.flights_recyler);
+        adapter.add(new FlightItem());
+        adapter.add(new FlightItem());
+        adapter.add(new FlightItem());
+        mRecyler.setAdapter(adapter);
         return view;
     }
 
@@ -80,4 +92,17 @@ public class FlightsFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }*/
 
+}
+
+class FlightItem extends Item<ViewHolder>{
+
+    @Override
+    public void bind(@NonNull ViewHolder viewHolder, int position) {
+
+    }
+
+    @Override
+    public int getLayout() {
+        return R.layout.flights_row;
+    }
 }

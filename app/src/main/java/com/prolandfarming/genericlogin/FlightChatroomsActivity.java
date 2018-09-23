@@ -19,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.prolandfarming.genericlogin.Models.Chatroom;
+import com.prolandfarming.genericlogin.Models.Flight;
 import com.prolandfarming.genericlogin.Models.Message;
 import com.squareup.picasso.Picasso;
 import com.xwray.groupie.GroupAdapter;
@@ -41,13 +42,27 @@ public class FlightChatroomsActivity extends AppCompatActivity {
     private DatabaseReference mDBChatroomsReference = FirebaseDatabase.getInstance().getReference("/chatrooms/");
 
     private RecyclerView mRecyler;
-    private ArrayList<Chatroom> chatRooms;
-
+    private List<Chatroom> mChatRooms;
+    private Flight mFlight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_chatrooms);
+
+        mFlight = new Flight();
+        mFlight.flightUID = "44ca609e-9547-4654-82ca-cf5bfb84ed94";
+        mFlight.arrivalAirport = "SAW";
+        mFlight.departureAirport = "ESB";
+        mFlight.distanceMiles = 200.5;
+        mFlight.equipment = "737-300";
+        mFlight.flightNumber = "TK2965";
+        mFlight.operatingAirline = "THY";
+        List<String> chatrooms = new ArrayList<>();
+        chatrooms.add("127224c4-b9c0-49af-afa1-b57af2d91821");
+        chatrooms.add("2751b63f-3de7-4413-a441-b0f2f6f891aa");
+        chatrooms.add("b86eb5ac-7a12-4446-b223-73ba3d5053f3");
+        mFlight.chatroomsUID = chatrooms;
 
         Toolbar myToolbar = findViewById(R.id.flight_chatrooms_toolbar);
         myToolbar.setNavigationIcon(R.drawable.ic_arrow_back_dark);
@@ -79,69 +94,55 @@ public class FlightChatroomsActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        DatabaseReference mChatroomMessagesRef = mDBChatroomsReference.child("messagesUID");
-        final List<String> messages = new ArrayList<>();
-        mChatroomMessagesRef.orderByKey().limitToFirst(100).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                messages.add(dataSnapshot.getValue(String.class));
-            }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+        for (String chatUID : mFlight.chatroomsUID){
+            DatabaseReference mChatroomRef = mDBChatroomsReference.child(chatUID);
+            DatabaseReference mChatroomMessagesRef = mChatroomRef.child("messagesUID");
+            final List<String> messages = new ArrayList<>();
+            mChatroomMessagesRef.orderByKey().limitToFirst(100).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    messages.add(dataSnapshot.getValue(String.class));
+                }
 
-            }
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                }
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-            }
+                }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+                }
+            });
+            mChatroomRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String cRoomName = dataSnapshot.child("chatroomName").getValue(String.class);
+                    String cRoomPhoto = dataSnapshot.child("chatroomPhoto").getValue(String.class);
+                    String cRoomUID = dataSnapshot.child("chatroomUID").getValue(String.class);
 
-        mDBChatroomsReference.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String cRoomName = dataSnapshot.child("chatroomName").getValue(String.class);
-                String cRoomPhoto = dataSnapshot.child("chatroomPhoto").getValue(String.class);
-                String cRoomUID = dataSnapshot.child("chatroomUID").getValue(String.class);
+                    Chatroom newChatRoom = new Chatroom(cRoomUID, cRoomName, new ArrayList<String>(), messages, cRoomPhoto, false);
 
-                Chatroom newChatRoom = new Chatroom(cRoomUID, cRoomName, new ArrayList<String>(), messages, cRoomPhoto, false);
-                // TODO if user exist in that group
-                adapter.add(new ChatroomItem(newChatRoom));
-            }
+                    adapter.add(new ChatroomItem(newChatRoom));
+                }
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                // TODO
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-                // TODO
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                // TODO
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                // TODO
-            }
-        });
-        mRecyler.setAdapter(adapter);
-
+                }
+            });
+            mRecyler.setAdapter(adapter);
+        }
     }
 
     @Override

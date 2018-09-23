@@ -1,16 +1,20 @@
 package com.prolandfarming.genericlogin;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,7 +61,20 @@ public class ChatActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         mChatroom = (Chatroom) intent.getSerializableExtra(getString(R.string.INTENT_PARAM_KEY_CHATROOM));
-        //getSupportActionBar().setTitle(mChatroom.chatroomName);
+
+        Toolbar myToolbar = findViewById(R.id.toolbar_chat);
+        myToolbar.setNavigationIcon(R.drawable.ic_arrow_back_dark);
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setLogo(R.drawable.sociboard_logo_action_bar);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         mRecyler = findViewById(R.id.chat_recyler);
 
         mEdittext = findViewById(R.id.chat_entry_text);
@@ -76,34 +93,60 @@ public class ChatActivity extends AppCompatActivity {
 
     private void initMessages() {
         if(mChatroom != null && mChatroom.messagesUID != null) {
-            for (String msgUID : mChatroom.messagesUID) {
-                mDBMessagesReference.child(msgUID).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Message msg = dataSnapshot.getValue(Message.class);
-                        if (msg.senderUID.equals(mUserUID)) {
-                            adapter.add(new ToMessageItem(msg));
-                        } else {
-                            adapter.add(new FromMessageItem(msg));
+
+            mChatroomReference.child(mChatroom.chatroomUID).child("messagesUID").addChildEventListener(new ChildEventListener(){
+
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    String messageUID = dataSnapshot.getValue(String.class);
+                    mDBMessagesReference.child(messageUID).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Message msg = dataSnapshot.getValue(Message.class);
+                            if (msg.senderUID.equals(mUserUID)) {
+                                adapter.add(new ToMessageItem(msg));
+                            } else {
+                                adapter.add(new FromMessageItem(msg));
+                            }
                         }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    }
-                });
-            }
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
         }
         mRecyler.setAdapter(adapter);
 
     }
 
     private void sendMessage(String message) {
+        mEdittext.setText("");
         Message newMessage = new Message(UUID.randomUUID().toString(), message, mUserUID, mUser.name, Calendar.getInstance().getTime());
-        adapter.add(new ToMessageItem(newMessage));
+        //adapter.add(new ToMessageItem(newMessage));
         mDBMessagesReference.child(newMessage.messageUID).setValue(newMessage);
-
         mChatroomReference.child(mChatroom.chatroomUID).child("messagesUID/").child((System.currentTimeMillis())+"").setValue(newMessage.messageUID);
     }
 }

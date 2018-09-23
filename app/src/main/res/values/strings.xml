@@ -23,6 +23,12 @@
         <item>Mrs.</item>
     </string-array>
 
+    <string-array name="add_chat_options">
+        <item>Chat</item>
+        <item>Invite to a game</item>
+        <item>Block</item>
+    </string-array>
+
     <string name="login">Login</string>
     <string name="title">Title</string>
     <string name="forgot_password">Forgot your password?</string>

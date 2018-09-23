@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.prolandfarming.genericlogin.Models.Chatroom;
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_profile:
                     return true;
                 case R.id.navigation_settings:
+                    FirebaseAuth.getInstance().signOut();
+                    finish();
                     return true;
             }
             return false;
