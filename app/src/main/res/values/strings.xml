@@ -16,6 +16,7 @@
     </string>
 
     <string name="INTENT_PARAM_KEY_USER">INTENT_PARAM_KEY_USER</string>
+    <string name="INTENT_PARAM_KEY_CHATROOM">INTENT_PARAM_KEY_CHATROOM</string>
 
     <string-array name="title_array">
         <item>Mr.</item>
@@ -51,6 +52,8 @@
 
     <string name="action_search">Search</string>
     <string name="action_add">Add</string>
+    <string name="add_chatroom_prompt">Join one of the public channels below</string>
+    <string name="add_chatroom_other_option">or tap one of the seats to a personal chat with the visible passengers</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -1,9 +1,10 @@
 package com.prolandfarming.genericlogin.Models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chatroom {
+public class Chatroom implements Serializable{
     public String chatroomUID;
     public String chatroomName;
     public List<String> usersUID;

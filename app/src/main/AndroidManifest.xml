@@ -4,7 +4,7 @@
 
     <!-- To access Google+ APIs: -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -32,7 +32,13 @@
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity android:name=".FlightChatroomsActivity"></activity>
+        <activity android:name=".FlightChatroomsActivity" />
+        <activity android:name=".AddChatroomActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FlightChatroomsActivity" />
+        </activity>
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

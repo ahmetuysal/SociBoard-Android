@@ -3,4 +3,9 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#242B37</color>
     <color name="colorAccent">#D7353B</color>
+
+    <color name="generalButtonColor">#d6353b</color>
+    <color name="travelButtonColor">#d7b136</color>
+    <color name="gamingButtonColor">#875ec6</color>
+    <color name="businessButtonColor">#60c46e</color>
 </resources>
