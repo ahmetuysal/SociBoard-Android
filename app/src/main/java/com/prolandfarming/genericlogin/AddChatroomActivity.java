@@ -92,8 +92,11 @@ public class AddChatroomActivity extends AppCompatActivity {
                         String cRoomName = dataSnapshot.child("chatroomName").getValue(String.class);
                         String cRoomPhoto = dataSnapshot.child("chatroomPhoto").getValue(String.class);
                         String cRoomUID = dataSnapshot.child("chatroomUID").getValue(String.class);
-
                         chatroom[0] = new Chatroom(cRoomUID, cRoomName, new ArrayList<String>(), messages, cRoomPhoto, false);
+                        Intent intent = new Intent(AddChatroomActivity.this, ChatActivity.class);
+                        intent.putExtra(getString(R.string.INTENT_PARAM_KEY_CHATROOM), chatroom[0]);
+                        startActivity(intent);
+                        finish();
                     }
 
                     @Override
@@ -101,11 +104,6 @@ public class AddChatroomActivity extends AppCompatActivity {
 
                     }
                 });
-
-                Intent intent = new Intent(view.getContext(), ChatActivity.class);
-                intent.putExtra(getString(R.string.INTENT_PARAM_KEY_CHATROOM), chatroom[0]);
-                startActivity(intent);
-                finish();
                 // TODO
             }
         });

@@ -82,9 +82,6 @@ public class ChatActivity extends AppCompatActivity {
 
         mEdittext = findViewById(R.id.chat_entry_text);
 
-        if (mChatroom.chatroomName.equals("Travel")){
-
-        }
 
         FloatingActionButton fab_send_btn = findViewById(R.id.chat_send_message_fab);
         fab_send_btn.setOnClickListener(new View.OnClickListener() {
